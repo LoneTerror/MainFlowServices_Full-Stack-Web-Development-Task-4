@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Aesthetic Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="display" disabled>
+        </div>
+        <div class="buttons">
+            <button class="btn AC" onclick="clearDisplay()">AC</button>
+            <button class="btn" onclick="deleteLast()">&larr;</button>
+            <button class="btn" onclick="toggleSign()">+/-</button>
+            <button class="btn opr" onclick="appendToDisplay('÷')">÷</button>
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn" onclick="appendToDisplay('9')">9</button>
+            <button class="btn opr" onclick="appendToDisplay('x')">x</button>
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn" onclick="appendToDisplay('6')">6</button>
+            <button class="btn opr" onclick="appendToDisplay('-')">-</button>
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn" onclick="appendToDisplay('3')">3</button>
+            <button class="btn opr" onclick="appendToDisplay('+')">+</button>
+            <button class="btn" onclick="appendToDisplay('%')">%</button>
+            <button class="btn" onclick="appendToDisplay('0')">0</button>
+            <button class="btn" onclick="appendToDisplay('.')">.</button>
+            <button class="btn equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+    <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(to top, rgba(48, 47, 47, 0.815), rgb(0, 0, 0));
+        font-family: 'Helvetica', sans-serif;
+    }
+
+    .calculator {
+        background: #363636;
+        padding: 50px 25px;
+        border-radius: 8px;
+        box-shadow: 0 0px 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .display {
+        margin-bottom: 30px;
+        margin-right: 20px;
+    }
+
+    #display {
+        color: rgb(255, 255, 255);
+        width: 100%;
+        padding: 10px;
+        font-size: 2em;
+        border: none;
+        outline: none;
+        text-align: right;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    .btn {
+        color: aliceblue;
+        background: #494949;
+        border: 0.2px solid #000000;
+        padding: 20px;
+        font-size: 1.5em;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+        background: #7c7c7c;
+        transform: translateY(-3px);
+    }
+
+    .btn:active {
+        background: #3d3d3d;
+        transform: translateY(0);
+    }
+
+    .AC {
+        background: #883131;
+        color: rgb(0, 0, 0);
+    }
+
+    .AC:hover {
+        background: #bd3127;
+    }
+
+    .AC:active {
+        background: #3d3d3d;
+    }
+
+    .equals {
+        background: #2e681d;
+        color: rgb(255, 255, 255);
+    }
+
+    .equals:hover {
+        background: #258807;
+    }
+
+    .equals:active {
+        background: #3d3d3d;
+    }
+
+    .opr{
+        background-color: rgb(8, 94, 105);
+    }
+
+    .opr:hover{
+        background-color: rgb(11, 127, 143);
+    }
+
+    </style>
+
+    <script>
+    function clearDisplay() {
+        document.getElementById('display').value = '';
+    }
+
+    function deleteLast() {
+        let display = document.getElementById('display');
+        display.value = display.value.slice(0, -1);
+    }
+
+    function appendToDisplay(value) {
+        document.getElementById('display').value += value;
+    }
+
+    function toggleSign() {
+        let display = document.getElementById('display');
+        if (display.value.startsWith('-')) {
+            display.value = display.value.slice(1);
+        } else {
+            display.value = '-' + display.value;
+        }
+    }
+
+    function calculate() {
+        let display = document.getElementById('display');
+        let expression = display.value.replace(/÷/g, '/').replace(/x/g, '*');
+        try {
+            display.value = eval(expression);
+        } catch (e) {
+            display.value = 'Error';
+        }
+    }
+    </script>
+
+</body>
+</html>
